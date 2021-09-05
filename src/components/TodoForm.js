@@ -14,7 +14,10 @@ export default class TodoForm extends React.Component {
 
    handleSubmit = (event) => {
       event.preventDefault();
-      // submit
+      this.props.onSubmit({
+         text: this.state.text,
+         complete: false,
+      });
    };
 
    render() {

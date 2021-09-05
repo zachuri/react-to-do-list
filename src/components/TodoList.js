@@ -6,10 +6,22 @@ export default class TodoList extends React.Component {
       todos: [],
    };
 
+   addTodo = (todo) => {
+      // Creating copy of current state array and passing it to newTodos
+      // 	using ... syntax from JS
+      // 	Also, adding a new todo to the begining of the array and adding the copy
+      //     of all the todos in the from the array after
+      // E.g) const newTodos = [todo, ...this.state.todos];
+
+      this.setState({
+         todos: [todo, ...this.state.todos],
+      });
+   };
+
    render() {
       return (
          <div>
-            <TodoForm />
+            <TodoForm onSubmit={this.addTodo} />
          </div>
       );
    }
