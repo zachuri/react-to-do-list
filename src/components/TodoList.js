@@ -22,7 +22,12 @@ export default class TodoList extends React.Component {
       return (
          <div>
             <TodoForm onSubmit={this.addTodo} />
-            {JSON.stringify(this.state.todos)}
+
+            {/* Creating a Map of all the TODOS */}
+            {/* key of the id which will display the text of that id */}
+            {this.state.todos.map((todo) => (
+               <div key={todo.id}>{todo.text}</div>
+            ))}
          </div>
       );
    }
