@@ -1,13 +1,30 @@
 import React from "react";
 
 export default class Counter extends React.Component {
-   constructor(props) {
-      super(props);
+   // If initializing the constructor with just this.state
+   // then you don't need the write the constructor function
 
-      this.state = {
-         count: 0,
-      };
-   }
+   // constructor(props) {
+   //    super(props);
+
+   //    this.state = {
+   //       count: 0,
+   //    };
+   // }
+
+   state = {
+      count: 0,
+   };
+
+   // Use the constructor if you want to change the default
+   // value in the component tag
+
+   // constructor(props) {
+   //    super(props);
+   //    this.state = {
+   //       count: props.initialCount,
+   //    };
+   // }
 
    // The difference is that you have to write this.bind.function_Name
    //	 	which will be undefined in console
