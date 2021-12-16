@@ -6,48 +6,50 @@ export default class MyForm extends React.Component {
 
 		this.state = {
 			name: "ben",
-			favoritePet: "",
+			favoritePet: "zack",
 			rememberMe: false,
 			title: "Miss.",
 		};
 	}
 
 	handleChange = (event) => {
-		// console.log(event.target.value);
-		this.setState({ name: event.target.value });
+		const isCheckbox = event.target.type === "checkbox";
+		this.setState({
+			[event.target.name]: isCheckbox
+				? event.target.checked
+				: event.target.value,
+		});
 	};
 
-	handleChangeFavoritePet = (event) => {
-		// console.log(event.target.value);
-		this.setState({ favoritePet: event.target.value });
-	};
-
-	handleCheck = (event) => {
-		this.setState({ rememberMe: event.target.check });
-	};
-
-	handleSelect = (event) => {
-		this.setState({ title: event.target.check });
-	};
-
-	handleSubmit = () => {
+	handleSubmit = (event) => {
+		event.preventDefault();
 		console.log(this.state);
 	};
 	render() {
 		return (
 			<div>
-				<input value={this.state.name} onChange={this.handleChange} />
+				<input
+					name="name"
+					value={this.state.name}
+					onChange={this.handleChange}
+				/>
 				<textarea
+					name="favoritePet"
 					value={this.state.favoritePet}
-					onChange={this.handleChangeFavoritePet}
+					onChange={this.handleChange}
 				/>
 				<input
+					name="remeberMe"
 					type="checkbox"
 					checked={this.state.rememberMe}
-					onChange={this.handleCheck}
+					onChange={this.handleChange}
 				/>
 				<div>
-					<select value={this.state.title} onChange={this.handleSelect}>
+					<select
+						name="title"
+						value={this.state.title}
+						onChange={this.handleSelect}
+					>
 						<option>Mr.</option>
 						<option>Miss.</option>
 						<option>Ms.</option>
