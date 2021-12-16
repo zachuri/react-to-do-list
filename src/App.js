@@ -1,31 +1,49 @@
 import React, { Component } from "react";
 import "./App.css";
-import TodoList from "./components/TodoList";
+import Counter2 from "./components/Counter2";
+import ImageSlider from "./components/ImageSlider";
+// import TodoList from "./components/TodoList";
 
 class App extends Component {
-   state = {
-      count: 0,
-   };
+	constructor(props) {
+		super(props);
+		this.state = {
+			visible: true,
+			whichComponentToShow: "ImageSlider",
+		};
+	}
 
-   increment = () => {
-      this.setState({
-         count: this.state.count + 1,
-      });
-   };
-
-   decrement = () => {
-      this.setState({
-         count: this.state.count - 1,
-      });
-   };
-
-   render() {
-      return (
-         <div className="App">
-            <TodoList />
-         </div>
-      );
-   }
+	render() {
+		if (this.state.whichComponentToShow === "ImageSlider") {
+			return (
+				<div className="App">
+					<ImageSlider />
+					<button
+						onClick={() => {
+							this.setState({ whichComponentToShow: "Counter2" });
+						}}
+					>
+						Show Counter
+					</button>
+				</div>
+			);
+		} else if (this.state.whichComponentToShow === "Counter2") {
+			return (
+				<div className="App">
+					<Counter2 />
+					<button
+						onClick={() => {
+							this.setState({ whichComponentToShow: "ImageSlider" });
+						}}
+					>
+						Show Image Slider
+					</button>
+				</div>
+			);
+		} else {
+			return null;
+		}
+	}
 }
 
 export default App;
