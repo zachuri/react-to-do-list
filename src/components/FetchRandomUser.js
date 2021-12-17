@@ -3,14 +3,14 @@ import React from "react";
 export default class FetchRandomUser extends React.Component {
 	state = {
 		loading: true,
-		person: null,
+		people: [],
 	};
 
 	async componentDidMount() {
-		const url = "https://api.randomuser.me/";
+		const url = "https://api.randomuser.me/?results=5";
 		const response = await fetch(url);
 		const data = await response.json();
-		this.setState({ loading: false, person: data.results[0] });
+		this.setState({ loading: false, people: data.results });
 		// console.log(data.results[0]);
 	}
 
@@ -19,19 +19,23 @@ export default class FetchRandomUser extends React.Component {
 			return <div>loading...</div>;
 		}
 
-		if (!this.state.person) {
+		if (!this.state.people) {
 			return <div>didn't get a person</div>;
 		}
 
-		return (
-			<div>
-				<div>
-					<div>{this.state.person.name.title}</div>
-					<div>{this.state.person.name.first}</div>
-					<div>{this.state.person.name.last}</div>
-					<img src={this.state.person.picture.large} />
+		const peopleJsx = []; // Store People JSX in an array
+
+		this.state.people.forEach((person) => {
+			peopleJsx.push(
+				<div key={person.name.first + person.name.last}>
+					<div>{person.name.title}</div>
+					<div>{person.name.first}</div>
+					<div>{person.name.last}</div>
+					<img src={person.picture.large} />
 				</div>
-			</div>
-		);
+			);
+		});
+
+		return <div>{peopleJsx}</div>;
 	}
 }
