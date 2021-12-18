@@ -22,10 +22,10 @@ export default class TodoForm extends React.Component {
 			complete: false,
 		});
 
+		//Clear the user input text after Submit
 		this.setState({
 			text: "",
 		});
-		//Submit
 	};
 
 	render() {
