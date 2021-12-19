@@ -86,11 +86,14 @@ export default class TodoList extends React.Component {
 						complete
 					</button>
 				</div>
-				<div>
-					<button onClick={this.removeAllTodosThatAreComplete}>
-						remove all complete todos
-					</button>
-				</div>
+				{/* Conditional statement to show removeAllTodosThatAre Compelete */}
+				{this.state.todos.filter((todo) => todo.complete).length ? (
+					<div>
+						<button onClick={this.removeAllTodosThatAreComplete}>
+							remove all complete todos
+						</button>
+					</div>
+				) : null}
 			</div>
 		);
 	}
